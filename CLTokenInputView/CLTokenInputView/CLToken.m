@@ -12,34 +12,34 @@
 
 - (id)initWithDisplayText:(NSString *)displayText context:(NSObject *)context
 {
-    self = [super init];
-    if (self) {
-        self.displayText = displayText;
-        self.context = context;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    self.displayText = displayText;
+    self.context = context;
+  }
+  return self;
 }
 
 - (BOOL)isEqual:(id)object
 {
-    if (self == object) {
-        return YES;
-    }
-    if (![object isKindOfClass:[CLToken class]]) {
-        return NO;
-    }
-
-    CLToken *otherObject = (CLToken *)object;
-    if ([otherObject.displayText isEqualToString:self.displayText] &&
-        [otherObject.context isEqual:self.context]) {
-        return YES;
-    }
+  if (self == object) {
+    return YES;
+  }
+  if (![object isKindOfClass:[CLToken class]]) {
     return NO;
+  }
+  
+  CLToken *otherObject = (CLToken *)object;
+  if ([otherObject.displayText isEqualToString:self.displayText] &&
+      ([otherObject.context isEqual:self.context] || otherObject.context == self.context)) {
+    return YES;
+  }
+  return NO;
 }
 
 - (NSUInteger)hash
 {
-    return self.displayText.hash + self.context.hash;
+  return self.displayText.hash + self.context.hash;
 }
 
 @end
